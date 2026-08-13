@@ -8420,13 +8420,56 @@
                 const targetElement = document.querySelector(targetId);
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + wrapper.scrollTop - offset;
-                console.log(offsetPosition);
                 wrapper.scrollTo({
                     top: offsetPosition,
                     behavior: "smooth"
                 });
             }));
         }));
+        const openCallback = document.querySelector(".callback__button");
+        const callbackBody = document.querySelector(".callback__body");
+        const closeCallback = document.querySelector(".callback__close");
+        if (openCallback && callbackBody && closeCallback) {
+            const openCallbackList = () => {
+                if (callbackBody.classList.contains("active")) return;
+                const closedHeight = 70;
+                callbackBody.classList.add("active");
+                openCallback.classList.add("close");
+                callbackBody.style.height = `${closedHeight}px`;
+                callbackBody.style.height = "auto";
+                const fullHeight = callbackBody.offsetHeight;
+                callbackBody.style.height = `${closedHeight}px`;
+                callbackBody.offsetHeight;
+                callbackBody.style.height = `${fullHeight}px`;
+                const handler = e => {
+                    if (e.propertyName !== "height") return;
+                    callbackBody.style.height = "auto";
+                    callbackBody.removeEventListener("transitionend", handler);
+                };
+                callbackBody.addEventListener("transitionend", handler);
+            };
+            const closeCallbackList = () => {
+                if (!callbackBody.classList.contains("active")) return;
+                const closedHeight = 70;
+                callbackBody.style.height = `${callbackBody.scrollHeight}px`;
+                callbackBody.offsetHeight;
+                callbackBody.style.height = `${closedHeight}px`;
+                const handler = e => {
+                    if (e.propertyName !== "height") return;
+                    callbackBody.classList.remove("active");
+                    openCallback.classList.remove("close");
+                    callbackBody.removeEventListener("transitionend", handler);
+                };
+                callbackBody.addEventListener("transitionend", handler);
+            };
+            openCallback.addEventListener("click", openCallbackList);
+            closeCallback.addEventListener("click", closeCallbackList);
+            document.addEventListener("click", (e => {
+                const isClickInsideList = callbackBody.contains(e.target);
+                const isClickOnButton = openCallback.contains(e.target);
+                if (callbackBody.classList.contains("active") && !isClickInsideList && !isClickOnButton) closeCallbackList();
+            }));
+        }
         spollers();
     })();
 })();

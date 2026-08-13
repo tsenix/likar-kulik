@@ -224,8 +224,6 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
   width: 30px;
   height: 3px;
   border-radius: 25px;
@@ -1183,10 +1181,14 @@ textarea.input {
   right: 10px;
   bottom: 50px;
   width: 70px;
-  height: 70px;
+  height: 70px
+}
+.callback__button {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   font-size: 12px;
   font-weight: 700;
   line-height: 120%;
@@ -1194,9 +1196,16 @@ textarea.input {
   color: #fff;
   background-color: rgba(8,133,127,.6);
   border-radius: 50%;
-  cursor: pointer
+  cursor: pointer;
+  transition: all .5s ease
 }
-.callback::after {
+.callback__button.close {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0);
+  transform: scale(0)
+}
+.callback__button::after {
   content: "";
   position: absolute;
   display: block;
@@ -1206,6 +1215,71 @@ textarea.input {
   height: 86px;
   border: 8px solid rgba(129,199,198,.6);
   border-radius: 50%
+}
+.callback__body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 0;
+  background-color: #f1fcfa;
+  box-shadow: 0 0 12px rgba(0,0,0,.4);
+  border-radius: 35px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .5s ease
+}
+.callback__body.active {
+  opacity: 1;
+  visibility: visible
+}
+.callback__close {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer
+}
+.callback__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35px;
+  height: 3px;
+  border-radius: 25px;
+  background-color: #08857f;
+  transition: all .5s ease
+}
+.callback__close span:first-child {
+  -webkit-transform: translate(-50%,-50%) rotate(45deg);
+  transform: translate(-50%,-50%) rotate(45deg)
+}
+.callback__close span:last-child {
+  -webkit-transform: translate(-50%,-50%) rotate(-45deg);
+  transform: translate(-50%,-50%) rotate(-45deg)
+}
+.callback__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px
+}
+.callback__social svg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  fill: #08857f;
+  transition: fill .5s ease
 }
 .breadcrumbs__list {
   display: flex;
@@ -1590,9 +1664,15 @@ textarea.input {
   .info__body a:hover {
     color: #617d7b
   }
-  .callback:hover::after {
+  .callback__button:hover::after {
     -webkit-animation: callbackText 1.5s infinite;
     animation: callbackText 1.5s infinite
+  }
+  .callback__close:hover span {
+    background-color: #617d7b
+  }
+  .callback__social:hover svg {
+    fill: #617d7b
   }
   .breadcrumbs__item.link:hover {
     color: #08857f
