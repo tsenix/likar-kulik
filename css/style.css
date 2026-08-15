@@ -952,11 +952,6 @@ textarea.input {
   flex-direction: column;
   gap: 20px
 }
-.roles__row {
-  display: flex;
-  flex-direction: column;
-  gap: 20px
-}
 .roles__item {
   display: flex;
   flex-direction: column;
@@ -1460,19 +1455,13 @@ textarea.input {
     flex: 0 0 calc(50% - 10px);
     width: calc(50% - 10px)
   }
-  .roles__row {
-    flex-direction: row
+  .roles__body {
+    flex-direction: row;
+    flex-wrap: wrap
   }
-  .roles__row.reverse {
-    flex-direction: row-reverse
-  }
-  .roles__item:first-child {
-    flex: 0 0 calc(40% - 10px);
-    width: calc(40% - 10px)
-  }
-  .roles__item:last-child {
-    flex: 0 0 calc(60% - 10px);
-    width: calc(60% - 10px)
+  .roles__item {
+    flex: 0 0 calc(50% - 10px);
+    width: calc(50% - 10px)
   }
   .feedbacks__slider {
     width: 720px
@@ -1699,6 +1688,15 @@ textarea.input {
   }
   .about__prof {
     font-size: 30px
+  }
+  .roles__item {
+    flex: 0 0 calc(40% - 10px);
+    width: calc(40% - 10px)
+  }
+  .roles__item:nth-child(4n+2),
+  .roles__item:nth-child(4n+3) {
+    flex: 0 0 calc(60% - 10px);
+    width: calc(60% - 10px)
   }
   .blogs__body {
     gap: 20px
